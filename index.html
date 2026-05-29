@@ -427,6 +427,110 @@ h1{
 .panel[data-tab="linux"]     .eval-tag{border-color:rgba(132,204,22,.3);color:var(--linux);}
 .panel[data-tab="cloudsec"]  .eval-tag{border-color:rgba(167,139,250,.3);color:var(--cloudsec);}
 .panel[data-tab="devsecops"] .eval-tag{border-color:rgba(251,113,133,.3);color:var(--devsecops);}
+
+/* ─── SCROLL TO TOP ─── */
+#scroll-top{
+  position:fixed;bottom:28px;right:28px;z-index:999;
+  width:42px;height:42px;border-radius:50%;
+  background:var(--card);border:1px solid var(--border2);
+  color:var(--muted2);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .25s,background .15s,border-color .15s,transform .15s;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+#scroll-top.visible{opacity:1;pointer-events:all;}
+#scroll-top:hover{background:var(--border2);border-color:var(--muted);color:var(--text);transform:translateY(-2px);}
+
+/* ─── YOUR PATH TAB ─── */
+.tab-btn.yourpath{
+  background:linear-gradient(135deg,rgba(255,107,53,.1),rgba(167,139,250,.1));
+  border-color:var(--border2);color:var(--muted2);
+}
+.tab-btn.yourpath:hover{border-color:var(--muted);color:var(--text);}
+.tab-btn.yourpath.active{
+  background:linear-gradient(135deg,#ff6b35,#a78bfa);
+  color:#000;border-color:transparent;font-weight:700;
+}
+
+/* ─── QUIZ PANEL ─── */
+#panel-yourpath{display:none;position:relative;z-index:1;min-height:60vh;}
+#panel-yourpath.active{display:block;}
+.quiz-wrap{max-width:760px;margin:0 auto;padding:56px 48px 80px;}
+@media(max-width:600px){.quiz-wrap{padding:32px 20px 60px;}}
+
+.quiz-intro{text-align:center;padding:20px 0 12px;}
+.quiz-intro-icon{font-size:48px;margin-bottom:20px;display:block;}
+.quiz-intro-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(36px,6vw,64px);letter-spacing:.03em;
+  background:linear-gradient(120deg,#ff6b35,#a78bfa 60%,#22d3ee);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:14px;line-height:1;
+}
+.quiz-intro-sub{color:var(--muted2);font-size:15px;font-weight:300;max-width:480px;margin:0 auto 36px;line-height:1.8;}
+.quiz-start-btn{
+  font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  padding:14px 40px;border:none;border-radius:3px;
+  background:linear-gradient(135deg,#ff6b35,#a78bfa);color:#000;cursor:pointer;font-weight:700;
+  transition:opacity .15s,transform .15s;
+}
+.quiz-start-btn:hover{opacity:.88;transform:translateY(-1px);}
+
+.quiz-progress-row{display:flex;align-items:center;gap:14px;margin-bottom:32px;}
+.quiz-progress-bar{flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+.quiz-progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#ff6b35,#a78bfa);transition:width .4s ease;}
+.quiz-progress-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap;letter-spacing:.08em;}
+
+.quiz-q-screen{display:none;}
+.quiz-q-screen.active{display:block;animation:fadeUp .3s ease forwards;}
+.quiz-q-num{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.quiz-q-text{font-size:clamp(16px,2.5vw,21px);font-weight:500;color:var(--text);line-height:1.55;margin-bottom:28px;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;}
+.quiz-option{
+  display:flex;align-items:flex-start;gap:14px;padding:14px 18px;
+  border:1px solid var(--border);background:var(--card);border-radius:3px;
+  cursor:pointer;transition:all .15s;text-align:left;width:100%;font-family:'Inter',sans-serif;
+}
+.quiz-option:hover{border-color:var(--border2);background:var(--surface);}
+.quiz-option.selected{border-color:#a78bfa;background:rgba(167,139,250,.07);}
+.quiz-option-letter{
+  font-family:'Space Mono',monospace;font-size:11px;
+  min-width:22px;height:22px;border-radius:2px;border:1px solid var(--border2);
+  color:var(--muted);display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;transition:all .15s;
+}
+.quiz-option.selected .quiz-option-letter{background:#a78bfa;border-color:#a78bfa;color:#000;font-weight:700;}
+.quiz-option-text{font-size:13px;color:var(--text);line-height:1.55;}
+.quiz-option-sub{font-size:11px;color:var(--muted);margin-top:3px;}
+
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:28px;gap:12px;}
+.quiz-btn{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:9px 22px;border-radius:3px;cursor:pointer;transition:all .15s;}
+.quiz-btn-back{border:1px solid var(--border);background:transparent;color:var(--muted);}
+.quiz-btn-back:hover{border-color:var(--border2);color:var(--text);}
+.quiz-btn-next{border:none;background:linear-gradient(135deg,#ff6b35,#a78bfa);color:#000;font-weight:700;}
+.quiz-btn-next:hover{opacity:.88;}
+.quiz-btn-next:disabled{opacity:.3;cursor:not-allowed;}
+
+.quiz-result{display:none;}
+.quiz-result.active{display:block;animation:fadeUp .4s ease forwards;}
+.result-header{text-align:center;margin-bottom:36px;}
+.result-match-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+.result-role{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,72px);letter-spacing:.03em;line-height:1;margin-bottom:12px;}
+.result-tagline{color:var(--muted2);font-size:14px;font-weight:300;max-width:500px;margin:0 auto 28px;line-height:1.8;}
+.score-grid{display:flex;flex-direction:column;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:3px;padding:24px 28px;margin-bottom:24px;}
+.score-row{display:flex;align-items:center;gap:14px;}
+.score-name{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;min-width:140px;color:var(--muted2);}
+.score-bar-wrap{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden;}
+.score-bar-fill{height:100%;border-radius:3px;width:0;transition:width 1s ease .2s;}
+.score-pct{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);min-width:32px;text-align:right;}
+.result-traits{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;}
+.trait-tag{font-family:'Space Mono',monospace;font-size:9px;padding:4px 12px;border:1px solid var(--border2);color:var(--muted2);border-radius:2px;letter-spacing:.05em;}
+.result-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.result-btn-primary{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:12px 28px;border:none;border-radius:3px;cursor:pointer;font-weight:700;transition:all .15s;}
+.result-btn-primary:hover{opacity:.88;transform:translateY(-1px);}
+.result-btn-secondary{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:12px 28px;border:1px solid var(--border2);background:transparent;color:var(--muted2);border-radius:3px;cursor:pointer;transition:all .15s;}
+.result-btn-secondary:hover{color:var(--text);border-color:var(--muted);}
 </style>
 </head>
 <body>
@@ -442,6 +546,7 @@ h1{
   <button class="tab-btn"        data-tab="linux"     onclick="switchTab('linux')">🐧 Linux / SRE</button>
   <button class="tab-btn"        data-tab="cloudsec"  onclick="switchTab('cloudsec')">🔒 Cloud Security</button>
   <button class="tab-btn"        data-tab="devsecops" onclick="switchTab('devsecops')">🛡 DevSecOps</button>
+  <button class="tab-btn yourpath" data-tab="yourpath"  onclick="switchTab('yourpath')">✦ Your Path</button>
 </nav>
 
 <!-- ═══════════════════════ DEVOPS PANEL ═══════════════════════ -->
@@ -1992,22 +2097,71 @@ h1{
 
 </div>
 
+<!-- ─── SCROLL TO TOP ─── -->
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+<!-- ═══════════════════════ YOUR PATH PANEL ═══════════════════════ -->
+<div id="panel-yourpath" class="panel" data-tab="yourpath">
+<div class="quiz-wrap">
+
+  <!-- INTRO -->
+  <div id="quiz-intro" class="quiz-intro">
+    <span class="quiz-intro-icon">🧭</span>
+    <div class="quiz-intro-title">Find Your Path</div>
+    <p class="quiz-intro-sub">Answer 10 quick questions and we'll match you to the engineering track that fits how you think, what energizes you, and where you want your career to go.</p>
+    <button class="quiz-start-btn" onclick="startQuiz()">Start the Quiz →</button>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div id="quiz-questions" style="display:none">
+    <div class="quiz-progress-row">
+      <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress-fill"></div></div>
+      <span class="quiz-progress-label" id="quiz-progress-label">1 / 10</span>
+    </div>
+    <div id="quiz-q-container"></div>
+    <div class="quiz-nav">
+      <button class="quiz-btn quiz-btn-back" id="quiz-back-btn" onclick="quizBack()">← Back</button>
+      <button class="quiz-btn quiz-btn-next" id="quiz-next-btn" onclick="quizNext()" disabled>Next →</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="quiz-result" class="quiz-result">
+    <div class="result-header">
+      <div class="result-match-label">Your Best Match</div>
+      <div class="result-role" id="result-role-name"></div>
+      <p class="result-tagline" id="result-tagline"></p>
+    </div>
+    <div class="score-grid" id="score-grid"></div>
+    <div class="result-traits" id="result-traits"></div>
+    <div class="result-actions">
+      <button class="result-btn-primary" id="result-go-btn" onclick="goToResult()" style="background:linear-gradient(135deg,#ff6b35,#a78bfa);color:#000;">View Full Roadmap →</button>
+      <button class="result-btn-secondary" onclick="retakeQuiz()">Retake Quiz</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
 <script>
+// ─── TAB SWITCHING ───────────────────────────────────────────────
 function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
-  const panel = document.getElementById(`panel-${tab}`);
-  panel.classList.add('active');
-  // re-trigger phase animations
-  panel.querySelectorAll('.phase').forEach(p => {
-    p.style.animation='none'; p.offsetHeight; p.style.animation='';
-  });
-  // animate salary bar
-  setTimeout(() => {
-    const fill = panel.querySelector('.salary-fill');
-    if (fill) { const w = fill.style.width; fill.style.width='0'; setTimeout(()=>fill.style.width=w, 60); }
-  }, 120);
+  document.querySelectorAll('.panel, #panel-yourpath').forEach(p => p.classList.remove('active'));
+  document.querySelector('.tab-btn[data-tab="' + tab + '"]').classList.add('active');
+  const panel = document.getElementById('panel-' + tab);
+  if (panel) panel.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+  if (tab !== 'yourpath') {
+    panel.querySelectorAll('.phase').forEach(function(p) {
+      p.style.animation='none'; p.offsetHeight; p.style.animation='';
+    });
+    setTimeout(function() {
+      const fill = panel.querySelector('.salary-fill');
+      if (fill) { const w = fill.style.width; fill.style.width='0'; setTimeout(function(){fill.style.width=w;}, 60); }
+    }, 120);
+  }
 }
 
 function toggleSteps(header) {
@@ -2018,10 +2172,251 @@ function toggleSteps(header) {
   toggle.classList.toggle('open', !isOpen);
 }
 
-// Animate initial salary bar
-window.addEventListener('load', () => {
+// ─── SCROLL TO TOP ───────────────────────────────────────────────
+window.addEventListener('scroll', function() {
+  const btn = document.getElementById('scroll-top');
+  if (window.scrollY > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+// ─── QUIZ DATA ───────────────────────────────────────────────────
+const TRACKS = {
+  devops:    { name:"DevOps Engineer",     color:"#ff6b35", tab:"devops",
+    tagline:"You are a builder and a fixer. You thrive connecting code to production — automating everything, owning the pipeline, and making deployments boring (in the best way)." },
+  cloud:     { name:"Cloud Engineer",      color:"#22d3ee", tab:"cloud",
+    tagline:"You think in architecture. Designing systems that scale, survive failures, and cost less is your kind of puzzle. You want to build things that last." },
+  linux:     { name:"Linux / SRE",         color:"#84cc16", tab:"linux",
+    tagline:"You want to know how everything actually works — down to the kernel. You are drawn to reliability, performance, and keeping production healthy at 2am." },
+  cloudsec:  { name:"Cloud Security Eng",  color:"#a78bfa", tab:"cloudsec",
+    tagline:"You think like an attacker and defend like an engineer. Finding misconfigurations before they become incidents is more satisfying than any other work." },
+  devsecops: { name:"DevSecOps Engineer",  color:"#fb7185", tab:"devsecops",
+    tagline:"You believe security belongs in every PR, not just at the end. You are the bridge between speed and safety — and you love building the gates that catch threats automatically." }
+};
+
+const QUESTIONS = [
+  {
+    q: "Something breaks on a website you built. What is your first reaction?",
+    options: [
+      { text: "I want to fix the process so it never breaks that way again",  sub: "Automate and prevent future failures",  scores: {devops:3, devsecops:1} },
+      { text: "I want to check the server and figure out what went wrong",    sub: "Dig into the infrastructure",           scores: {cloud:3, linux:1} },
+      { text: "I want to understand exactly why it happened at a deep level", sub: "Root cause is everything",              scores: {linux:3, devops:1} },
+      { text: "I want to check if someone caused it on purpose",              sub: "Could this be a security issue?",       scores: {cloudsec:3, devsecops:2} }
+    ]
+  },
+  {
+    q: "Which of these sounds most satisfying to work on?",
+    options: [
+      { text: "Writing a script that automates something people do by hand every day", sub: "Remove repetitive work forever",   scores: {devops:3, linux:1} },
+      { text: "Setting up a system in the cloud that scales automatically",            sub: "Build it once and let it grow",    scores: {cloud:3, devops:1} },
+      { text: "Figuring out why a computer is slow and making it fast again",          sub: "Performance and efficiency",       scores: {linux:3, cloud:1} },
+      { text: "Finding a hidden security flaw before anyone exploits it",              sub: "Protect people and systems",       scores: {cloudsec:3, devsecops:2} }
+    ]
+  },
+  {
+    q: "You get a free weekend to learn something new in tech. You pick:",
+    options: [
+      { text: "How to automatically test and ship code without touching a server", sub: "Automation and deployment pipelines", scores: {devops:3, devsecops:1} },
+      { text: "How to rent and set up servers in the cloud",                       sub: "Cloud platforms like AWS or Azure",   scores: {cloud:3, linux:1} },
+      { text: "How the operating system actually works under the hood",            sub: "The engine beneath everything",       scores: {linux:3, devops:1} },
+      { text: "How hackers break into systems so you can learn to stop them",      sub: "Offense to inform defense",           scores: {cloudsec:3, devsecops:2} }
+    ]
+  },
+  {
+    q: "A friend asks you to describe your dream job. You say:",
+    options: [
+      { text: "I make sure apps get from a developer to real users automatically", sub: "Bridging code and the real world",    scores: {devops:3, cloud:1} },
+      { text: "I design and manage the online infrastructure that apps run on",    sub: "The architect of digital systems",    scores: {cloud:3, devops:1} },
+      { text: "I keep systems running and investigate when things go wrong",       sub: "Reliability and deep problem solving", scores: {linux:3, cloudsec:1} },
+      { text: "I make sure systems and data are protected from attacks",           sub: "Security is my specialty",            scores: {cloudsec:3, devsecops:2} }
+    ]
+  },
+  {
+    q: "When you think about computers and software, what interests you most?",
+    options: [
+      { text: "How teams ship software to millions of people reliably every day", sub: "The engineering behind delivery",     scores: {devops:3, cloud:1} },
+      { text: "How companies run huge services without owning physical servers",  sub: "The power of the cloud",              scores: {cloud:3, linux:1} },
+      { text: "How operating systems manage memory, processes, and hardware",     sub: "The low-level machinery",             scores: {linux:3, devops:1} },
+      { text: "How attackers find weaknesses and how defenders stop them",        sub: "The security side of tech",           scores: {cloudsec:3, devsecops:2} }
+    ]
+  },
+  {
+    q: "A password accidentally gets saved in public code online. What is your instinct?",
+    options: [
+      { text: "Set up a check that catches this automatically before code is shared", sub: "Prevent it from happening again",  scores: {devsecops:3, devops:2} },
+      { text: "Change the password quickly and limit who can access that system",     sub: "Contain and fix the damage fast",  scores: {cloud:3, cloudsec:1} },
+      { text: "Investigate whether anyone used it to get in",                         sub: "Find out if there was a breach",   scores: {cloudsec:3, linux:1} },
+      { text: "Write a guide so the whole team avoids this mistake in future",        sub: "Education and shared process",     scores: {devsecops:2, cloudsec:2} }
+    ]
+  },
+  {
+    q: "Which of these projects sounds like the most fun to you?",
+    options: [
+      { text: "A system that automatically publishes an app whenever code changes",         sub: "No manual steps, ever",            scores: {devops:3, devsecops:1} },
+      { text: "A personal website in the cloud that stays online even if a server crashes", sub: "Resilient and reliable hosting",   scores: {cloud:3, devops:1} },
+      { text: "A tool that shows in real time how much memory and CPU your computer uses",  sub: "System health at a glance",        scores: {linux:3, cloud:1} },
+      { text: "A scanner that checks your own website for security weaknesses",             sub: "Find your own flaws first",        scores: {cloudsec:3, devsecops:2} }
+    ]
+  },
+  {
+    q: "How do you prefer to spend your energy at work?",
+    options: [
+      { text: "Making repetitive tasks disappear through automation",                   sub: "Work smarter, not harder",         scores: {devops:3, linux:1} },
+      { text: "Designing systems that handle scale, failure, and growth gracefully",    sub: "Architecture and resilience",      scores: {cloud:3, devops:1} },
+      { text: "Deeply understanding how things work so nothing surprises you",          sub: "Mastery over the whole stack",     scores: {linux:3, cloudsec:1} },
+      { text: "Staying one step ahead of people who want to cause harm",               sub: "Proactive protection",             scores: {cloudsec:3, devsecops:2} }
+    ]
+  },
+  {
+    q: "A website you manage goes down at night. How do you feel about being the one who gets called?",
+    options: [
+      { text: "Bring it on — I want full ownership of the system I run",           sub: "Responsibility comes with the role",  scores: {linux:3, devops:2} },
+      { text: "Fine with it — if I built it, I should be the one to fix it",      sub: "Accountability for your own work",    scores: {devops:2, cloud:2} },
+      { text: "I would rather design things so outages rarely happen",             sub: "Prevention over firefighting",        scores: {cloud:3, devsecops:1} },
+      { text: "Only for security incidents — that is where I want to focus",       sub: "Security response is my calling",    scores: {cloudsec:3, devsecops:2} }
+    ]
+  },
+  {
+    q: "How would you describe your problem-solving style?",
+    options: [
+      { text: "I find ways to automate the fix so the problem never happens again", sub: "Systematic and forward-thinking",   scores: {devops:3, devsecops:1} },
+      { text: "I think about the big picture and how all the pieces connect",       sub: "Architectural and strategic",       scores: {cloud:3, linux:1} },
+      { text: "I dig deep until I fully understand what caused the problem",        sub: "Methodical and thorough",           scores: {linux:3, devops:1} },
+      { text: "I think about what could go wrong and how to stop it ahead of time", sub: "Risk-aware and defensive",         scores: {cloudsec:3, devsecops:2} }
+    ]
+  }
+];
+
+// ─── QUIZ STATE ──────────────────────────────────────────────────
+let currentQ = 0;
+let answers = new Array(QUESTIONS.length).fill(null);
+
+function startQuiz() {
+  document.getElementById('quiz-intro').style.display = 'none';
+  document.getElementById('quiz-questions').style.display = 'block';
+  renderQuestion(0);
+}
+
+function renderQuestion(idx) {
+  currentQ = idx;
+  const q = QUESTIONS[idx];
+  const letters = ['A','B','C','D'];
+  const pct = Math.round((idx / QUESTIONS.length) * 100);
+  document.getElementById('quiz-progress-fill').style.width = pct + '%';
+  document.getElementById('quiz-progress-label').textContent = (idx + 1) + ' / ' + QUESTIONS.length;
+  document.getElementById('quiz-back-btn').style.visibility = idx === 0 ? 'hidden' : 'visible';
+  const nextBtn = document.getElementById('quiz-next-btn');
+  nextBtn.textContent = idx === QUESTIONS.length - 1 ? 'See Results' : 'Next';
+  nextBtn.disabled = answers[idx] === null;
+
+  let html = '<div class="quiz-q-screen active">';
+  html += '<div class="quiz-q-num">Question ' + (idx + 1) + ' of ' + QUESTIONS.length + '</div>';
+  html += '<div class="quiz-q-text">' + q.q + '</div>';
+  html += '<div class="quiz-options">';
+  q.options.forEach(function(opt, i) {
+    const sel = answers[idx] === i ? ' selected' : '';
+    html += '<button class="quiz-option' + sel + '" onclick="selectOption(' + i + ')">';
+    html += '<span class="quiz-option-letter">' + letters[i] + '</span>';
+    html += '<span><div class="quiz-option-text">' + opt.text + '</div>';
+    if (opt.sub) html += '<div class="quiz-option-sub">' + opt.sub + '</div>';
+    html += '</span></button>';
+  });
+  html += '</div></div>';
+  document.getElementById('quiz-q-container').innerHTML = html;
+}
+
+function selectOption(i) {
+  answers[currentQ] = i;
+  document.querySelectorAll('.quiz-option').forEach(function(el, idx) {
+    el.classList.toggle('selected', idx === i);
+  });
+  document.getElementById('quiz-next-btn').disabled = false;
+}
+
+function quizNext() {
+  if (answers[currentQ] === null) return;
+  if (currentQ < QUESTIONS.length - 1) {
+    renderQuestion(currentQ + 1);
+  } else {
+    showResult();
+  }
+}
+
+function quizBack() {
+  if (currentQ > 0) renderQuestion(currentQ - 1);
+}
+
+function showResult() {
+  document.getElementById('quiz-questions').style.display = 'none';
+  const result = document.getElementById('quiz-result');
+  result.classList.add('active');
+
+  const scores = {devops:0, cloud:0, linux:0, cloudsec:0, devsecops:0};
+  answers.forEach(function(ans, qi) {
+    if (ans === null) return;
+    const s = QUESTIONS[qi].options[ans].scores;
+    Object.keys(s).forEach(function(k) { scores[k] = (scores[k]||0) + s[k]; });
+  });
+
+  const sorted = Object.keys(scores).sort(function(a,b){ return scores[b]-scores[a]; });
+  const winner = sorted[0];
+  const track = TRACKS[winner];
+
+  document.getElementById('result-role-name').textContent = track.name;
+  document.getElementById('result-role-name').style.color = track.color;
+  document.getElementById('result-tagline').textContent = track.tagline;
+  document.getElementById('result-go-btn').setAttribute('data-track', winner);
+  document.getElementById('result-go-btn').style.background = 'linear-gradient(135deg,' + track.color + ',#a78bfa)';
+
+  const trackOrder = [
+    {key:'devops',label:'DevOps'},
+    {key:'cloud',label:'Cloud Eng'},
+    {key:'linux',label:'Linux / SRE'},
+    {key:'cloudsec',label:'Cloud Security'},
+    {key:'devsecops',label:'DevSecOps'}
+  ];
+  const totalMax = Math.max.apply(null, Object.keys(scores).map(function(k){return scores[k];})) || 1;
+  const sortedOrder = trackOrder.slice().sort(function(a,b){return scores[b.key]-scores[a.key];});
+  let gridHtml = '';
+  sortedOrder.forEach(function(t) {
+    const pct = Math.round((scores[t.key] / totalMax) * 100);
+    gridHtml += '<div class="score-row">';
+    gridHtml += '<span class="score-name">' + t.label + '</span>';
+    gridHtml += '<div class="score-bar-wrap"><div class="score-bar-fill" style="background:' + TRACKS[t.key].color + ';width:' + pct + '%"></div></div>';
+    gridHtml += '<span class="score-pct">' + pct + '%</span>';
+    gridHtml += '</div>';
+  });
+  document.getElementById('score-grid').innerHTML = gridHtml;
+
+  const traits = {
+    devops:    ['Automation-first','Pipeline builder','Reliability minded','Kubernetes native','GitOps advocate'],
+    cloud:     ['Architecture thinker','IaC practitioner','Cost conscious','Scalability focused','AWS/GCP fluent'],
+    linux:     ['Systems thinker','Performance hunter','Kernel curious','On-call ready','SLO driven'],
+    cloudsec:  ['Threat modeler','Zero-trust advocate','Compliance aware','Detection focused','IAM expert'],
+    devsecops: ['Shift-left mindset','Supply chain defender','Policy-as-code fan','Bridge builder','Security champion']
+  };
+  const myTraits = traits[winner] || [];
+  document.getElementById('result-traits').innerHTML = myTraits.map(function(t){
+    return '<span class="trait-tag">' + t + '</span>';
+  }).join('');
+}
+
+function goToResult() {
+  const track = document.getElementById('result-go-btn').getAttribute('data-track');
+  if (track) switchTab(track);
+}
+
+function retakeQuiz() {
+  answers = new Array(QUESTIONS.length).fill(null);
+  currentQ = 0;
+  document.getElementById('quiz-result').classList.remove('active');
+  document.getElementById('quiz-intro').style.display = 'block';
+  document.getElementById('quiz-questions').style.display = 'none';
+}
+
+// ─── INIT ────────────────────────────────────────────────────────
+window.addEventListener('load', function() {
   const fill = document.querySelector('#panel-devops .salary-fill');
-  if (fill) { const w = fill.style.width; fill.style.width='0'; setTimeout(()=>fill.style.width=w, 400); }
+  if (fill) { const w = fill.style.width; fill.style.width='0'; setTimeout(function(){fill.style.width=w;}, 400); }
 });
 </script>
 </body>
