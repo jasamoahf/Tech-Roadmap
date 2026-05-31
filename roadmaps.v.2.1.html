@@ -572,17 +572,16 @@ h1{
 }
 .quiz-option:not(.selected):hover{border-color:var(--border2);background:var(--surface);}
 .quiz-option.selected{
-  border-color:#a78bfa !important;
-  background:#a78bfa !important;
-  color:#000 !important;
-  transition:none;
+  border-color:#a78bfa;
+  background:#a78bfa;
+  color:#000;
 }
-.quiz-option.selected .quiz-option-text{color:#000 !important;}
-.quiz-option.selected .quiz-option-sub{color:rgba(0,0,0,.7) !important;}
+.quiz-option.selected .quiz-option-text{color:#000;}
+.quiz-option.selected .quiz-option-sub{color:rgba(0,0,0,.65);}
 .quiz-option.selected .quiz-option-letter{
-  background:#000 !important;
-  border-color:#000 !important;
-  color:#a78bfa !important;
+  background:#000;
+  border-color:#000;
+  color:#a78bfa;
   font-weight:700;
 }
 .quiz-option-letter{
@@ -5421,32 +5420,9 @@ function selectOption(i) {
       return;
     }
   }
-  var optBtns = document.querySelectorAll('#quiz-q-container .quiz-option');
+  var optBtns = document.querySelectorAll('.quiz-option');
   optBtns.forEach(function(el, idx) {
-    var isSelected = answers[currentQ].indexOf(idx) > -1;
-    el.classList.toggle('selected', isSelected);
-    // Force inline styles as guarantee
-    if (isSelected) {
-      el.style.background = '#a78bfa';
-      el.style.borderColor = '#a78bfa';
-      el.style.color = '#000';
-      var letter = el.querySelector('.quiz-option-letter');
-      if (letter) { letter.style.background='#000'; letter.style.borderColor='#000'; letter.style.color='#a78bfa'; }
-      var txt = el.querySelector('.quiz-option-text');
-      if (txt) txt.style.color = '#000';
-      var sub = el.querySelector('.quiz-option-sub');
-      if (sub) sub.style.color = 'rgba(0,0,0,0.65)';
-    } else {
-      el.style.background = '';
-      el.style.borderColor = '';
-      el.style.color = '';
-      var letter = el.querySelector('.quiz-option-letter');
-      if (letter) { letter.style.background=''; letter.style.borderColor=''; letter.style.color=''; }
-      var txt = el.querySelector('.quiz-option-text');
-      if (txt) txt.style.color = '';
-      var sub = el.querySelector('.quiz-option-sub');
-      if (sub) sub.style.color = '';
-    }
+    el.classList.toggle('selected', answers[currentQ].indexOf(idx) > -1);
   });
   document.getElementById('quiz-next-btn').disabled = answers[currentQ].length === 0;
 }
